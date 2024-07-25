@@ -1,0 +1,14 @@
+{
+    "thead":[
+       { "key":  "id", "name": "מזהה", "type": "string"  , "sortable": true , "searchable": true},
+       { "key":  "id", "name": "שם", "type": "string"  , "sortable": true , "searchable": true},
+       { "key":  "id", "name": "גיל", "type": "string"  , "sortable": true , "searchable": true},
+       { "key":  "id", "name": "דאטא", "type": "string"  , "sortable": true , "searchable": true},
+       { "key":  "id", "name": "עוד דטא", "type": "string"  , "sortable": true , "searchable": true}
+    ],
+    "tbody":[
+        {"id":"1","name":"John","age":"25","name1":"John","age2":"25"},
+        {"id":"2","name":"Alice","age":"30","name1":"John","age2":"25"},
+        {"id":"3","name":"Bob","age":"28","name1":"John","age2":"25"}
+    ]
+}

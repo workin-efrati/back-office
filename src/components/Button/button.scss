@@ -1,0 +1,16 @@
+.Button{
+    padding: .5rem 1rem ;
+    background:var(--primary-blue);
+    color: #fff;
+    font-family: var(--f-m-b);
+    border: 1px solid #fff;
+    font-size: var(--l-f);
+    border-radius: 10px;
+    &:hover{
+        cursor: pointer;
+        transform: scale(1.05);
+    }
+    &:active{
+        box-shadow: 0 0 6px 0 #000;
+    }
+}
