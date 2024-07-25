@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import Yosef from "./tests/Yosef"
+import Rubinstein from "./tests/Rubinstein"
 
 
 export default function App() {
@@ -9,6 +10,10 @@ export default function App() {
       {
         path: 'yosef',
         element: <Yosef />
+      },
+      {
+        path: 'rubinstein',
+        element: <Rubinstein/>
       }
     ]
   },
