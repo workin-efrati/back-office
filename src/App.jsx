@@ -8,14 +8,15 @@ import Video from "./outlet/Video/video"
 import Home from "./pages/Home/home"
 import Login from "./pages/Login/login"
 import Test from "./tests"
+import CheckLogin from "./hooks/CheckLogin"
 
 export default function App() {
 
   return (
     <div className="App">
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route element={<Home />}>
+
+        <Route element={<CheckLogin />}>
           <Route index element={<Dashboard />} />
           <Route path="editors-view" element={<Editors />} />
           <Route path="tags-view" element={<Tags />} />

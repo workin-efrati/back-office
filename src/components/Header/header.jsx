@@ -2,8 +2,10 @@ import { NavLink } from 'react-router-dom'
 import './header.scss'
 import { useState } from 'react'
 import { IoMenuSharp , IoCloseSharp} from "react-icons/io5";
+import { UseUserInfo } from '../../store/UseUserInfo';
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const logout = UseUserInfo(state=> state.logout)
   const nav = [
     {
       link: '/',
@@ -33,6 +35,11 @@ export default function Header() {
   const toggleMenu = () => {
     setMenuOpen(!menuOpen)
   }
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setUserInfo(null); 
+};
+
   return (
     <header className='Header'>
       <h1>לַמְּדֵנִי חֻוקֶּךָ</h1>
@@ -45,7 +52,7 @@ export default function Header() {
           <NavLink onClick={toggleMenu} key={item.link} to={`${item.link}`}>{item.title}</NavLink>
         ))}
       </nav>
-      <button className='logout'>התנתק</button>
+      <button className='logout' onClick={logout}>התנתק</button>
         </div>
     </header>
   )

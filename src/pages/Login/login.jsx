@@ -1,20 +1,23 @@
-import Button from '../../components/Button/button'
-import Input from '../../components/Input/input'
 import './login.scss'
-import { useNavigate } from 'react-router-dom'
-import LoginGoogle from './LoginGoogle'
+import { UseUserInfo } from '../../store/UseUserInfo'
+import { GoogleOAuthProvider } from '@react-oauth/google'
+import GoogleLogin from '../../components/GoogleLogin/googleLogin'
 
 export default function Login() {
-    const navigate = useNavigate()
-    const navToHome = ()=>{
-        navigate('/home')
-    }
+    const clientId = import.meta.env.VITE_APP_USER_ID;
+    const setUser = UseUserInfo(state => state.setUser)
+    const handleLoginSuccess = (userInfo) => {
+        localStorage.setItem('token', userInfo.token);
+        setUser(userInfo)
+    };
     return (
         <div className='Login'>
             <div className='bgCover'></div>
             <div className='container'>
                 <h2> התחברות</h2>
-                <LoginGoogle/>
+                <GoogleOAuthProvider clientId={clientId}>
+                    <GoogleLogin onLoginSuccess={handleLoginSuccess} />
+                </GoogleOAuthProvider>
             </div>
         </div>
     )
