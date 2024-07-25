@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900&display=swap');
-
+@import "./globals.scss";
+@font-face {
+  font-family: Heebo;
+  src: url(/fonts/Hebbo/Heebo/static/Heebo-Regular.ttf);
+}
+@font-face {
+  font-family: Bona;
+  src: url(/fonts/bona/BonaNovaSC-Regular.ttf);
+}
 * {
   margin: 0;
   padding: 0;
@@ -7,9 +15,70 @@
 }
 
 body {
+  direction: rtl;
   font-family: 'Heebo', sans-serif;
 }
 
 :root {
   --primary-color: #034077;
+}
+
+:root {
+  --xs-f: .6rem;
+  --s-f: .8rem;
+  --m-f: 1rem;
+  --l-f: 1.2rem;
+  --xl-f: 2rem;
+  --xxl-f: 2.6rem;
+  --primary-blue: #002651;
+  --light-blue: #034077;
+  --white: #FFFFFF;
+  --gray: #DFDFDF;
+  --blue-gradient: linear-gradient(to right, rgba(6, 119, 221, 0.9215686275) 0%, rgba(4, 81, 151, 0.8392156863) 51%, rgba(3, 64, 119, 0.8509803922) 80%);
+  --f-m-h:Heebo;
+  --f-m-b:Bona;
+
+}
+
+@media (width < $lg) {
+  :root {
+    --xs-f: .6rem;
+    --s-f: .8rem;
+    --m-f: 1rem;
+    --l-f: 1.2rem;
+    --xl-f: 2rem;
+    --xxl-f: 2.8rem
+  }
+}
+
+@media (width < $sm) {
+  :root {
+    --xs-f: .7rem;
+    --s-f: .9rem;
+    --m-f: 1rem;
+    --l-f: 1.3rem;
+    --xl-f: 1.8rem;
+    --xxl-f: 2rem
+  }
+}
+h1{
+  font-family: var(--f-m-b);
+}
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--light-blue);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-blue);
 }

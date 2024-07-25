@@ -1,0 +1,35 @@
+table.Table{
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 0 8px -5px #000;
+    border-radius: 10px;
+    overflow: hidden;
+    thead{
+        th{
+            background: var(--primary-blue);
+            color: #fff;
+            font-family: var(--f-m-b);
+            font-weight: 600;
+            padding: .6rem .2rem ;
+            text-align: right;
+        }
+    }
+    thead , tbody{
+        th , td{
+            padding: .6rem;
+            border: 1px solid #bebebe8e;
+            max-width: 70px;
+        }
+    }
+    tbody{
+        tr:nth-child(odd){
+            background-color: #fff;
+        }
+        tr:nth-child(even){
+            background-color: #ececec;
+        }
+     
+    }
+
+}
