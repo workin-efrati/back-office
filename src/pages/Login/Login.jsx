@@ -15,10 +15,10 @@ export default function Login() {
             <div className='bgCover'></div>
             <div className='container'>
                 <h2> התחברות</h2>
-            <GoogleOAuthProvider clientId={clientId}>
+                <GoogleOAuthProvider clientId={clientId}>
                     <GoogleLogin onLoginSuccess={handleLoginSuccess} />
                 </GoogleOAuthProvider>
-                    </div>
+            </div>
         </div>
     )
 }
