@@ -21,8 +21,8 @@ export default function Table({ thead, tbody = [], onEdit = () => { }, onDelete 
                             {columns.map((column, j) => (
                                 <td key={"td" + j}>{row[column]}</td>
                             ))}
-                            <td className='iconsTd' onClick={()=>{onEdit(row._id)}}><MdEdit/></td>
-                            <td className='iconsTd' onClick={()=>{onDelete(row._id)}}><FaTrash/></td>
+                            <td className='iconsTd' onClick={()=>{onEdit(row._id)}}><button><MdEdit/> </button> </td>
+                            <td className='iconsTd' onClick={()=>{onDelete(row._id)}}><button><FaTrash/> </button></td>
                         </tr>
                     )
                 })}

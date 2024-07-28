@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom'
 import AreaCharts from '../../components/AreaCharts/areaCharts'
 import './dashboard.scss'
 import data from "./data.json"
+import Select from '../../components/Select/select'
 export default function Dashboard() {
 
   return (
@@ -12,6 +13,7 @@ export default function Dashboard() {
         ))}
       </div>
       <div className="mainData">
+        <Select options={[]} />
       <AreaCharts/>
       </div>
     </div>
