@@ -1,61 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { GoogleOAuthProvider } from '@react-oauth/google';
-import GoogleLogin from '../../components/GoogleLogin/GoogleLogin';
-import styles from './login.module.scss';
-import axios from 'axios';
+import './login.scss'
+import { UseUserInfo } from '../../store/UseUserInfo'
+import { GoogleOAuthProvider } from '@react-oauth/google'
+import GoogleLogin from '../../components/GoogleLogin/googleLogin'
 
 export default function Login() {
     const clientId = import.meta.env.VITE_APP_USER_ID;
-    const [userInfo, setUserInfo] = useState();
-
-    const token = localStorage.getItem('token');
-    console.log("ID de cliente de GoogleOauth:", clientId);
-
+    const setUser = UseUserInfo(state => state.setUser)
     const handleLoginSuccess = (userInfo) => {
-        setUserInfo(userInfo);
+        localStorage.setItem('token', userInfo.token);
+        setUser(userInfo)
     };
-
-    const handleLogout = () => {
-        localStorage.removeItem('token');
-        setUserInfo(null); 
-    };
-
-
-
-
-
-if(token && !userInfo){
-    const getUserInfo = async () => {
-        try {
-          const userInfoResponse = await axios.get(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${token}`);
-          const userInfo = userInfoResponse.data;
-          setUserInfo(userInfo);
-        } catch (error) {
-          console.error('Error getting user info:', error);
-        }
-      };
-      getUserInfo();
-    }
-
-
-
     return (
-        <div className={styles.container}>
+        <div className='Login'>
+            <div className='bgCover'></div>
+            <div className='container'>
+                <h2> התחברות</h2>
             <GoogleOAuthProvider clientId={clientId}>
-                {userInfo ? (
-                    <div className={styles.userInfo}>
-                        <h2>{userInfo.name}</h2>
-                        <p>{userInfo.email}</p>
-                        <div className={styles.profile}>
-                        <img src={userInfo.picture} alt="Profile" />
-                        <button className={styles.logoutButton} onClick={handleLogout}>
-                            Logout
-                        </button>
-                        </div>
+                    <GoogleLogin onLoginSuccess={handleLoginSuccess} />
+                </GoogleOAuthProvider>
                     </div>
-                ) :  <GoogleLogin onLoginSuccess={handleLoginSuccess} />
-                }
-            </GoogleOAuthProvider>
         </div>
-    );
+    )
 }
