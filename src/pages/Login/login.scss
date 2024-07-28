@@ -1,0 +1,68 @@
+@import "../../globals.scss";
+.Login{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding-top: 15vh;
+    position: fixed;
+    top:0;
+    left: 0;
+    background: var(--blue-gradient);
+    .bgCover{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-image: url(/images/backgrounds/main-background.png);
+        opacity: .2;
+        z-index: -1;
+        filter: blur(4px);
+        background-size: cover;
+        background-position: center;
+    }
+    .container{
+        width: 100%;
+        height: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-direction: column;
+        max-width: 400px;
+        max-height: 300px;
+        background-color: #fff;
+        animation: pop .4s ease 0s 1 alternate forwards;
+        transform: scale(.1);
+        padding: 1.4rem;
+        background-color: rgba(0, 92, 164, 0.24);
+        -webkit-backdrop-filter: blur(4px);
+        backdrop-filter: blur(4px);
+        border-radius: 20px;
+        border: 2px solid #fff;
+        gap: 1rem;
+        h2{
+            color: #fff;
+            padding: 1.4rem;
+            font-family: var(--f-m-b);
+            text-align: center;
+            font-size: var(--xxl-f);
+        }
+        
+    }
+    @media (width < $lg) {
+     .container{
+        background: none;
+        border: none;
+     }       
+    }
+}
+@keyframes pop {
+    0% {
+        transform: scale(.1);
+    }
+    
+    100% {
+        transform: scale(1);
+    }
+}

@@ -1,0 +1,14 @@
+.Input{
+    width: 240px;
+    border-radius: 16px;
+    font-family: var(--f-m-h);
+    background-color: var(--primary-blue);
+    color: #fff;
+    padding:.5rem .6rem ;
+    font-size: var(--m-f);
+    border: 1px solid #fff;
+    &::placeholder{
+        color: #fff;
+        opacity: .4;
+    }
+}

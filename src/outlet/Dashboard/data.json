@@ -1,0 +1,20 @@
+{
+    "links": [
+        {
+            "title": "כללי",
+            "to": "/system-data"
+        },
+        {
+            "title": "כניסות לאתר",
+            "to": "/entries"
+        },
+        {
+            "title": "שאלות",
+            "to": "/"
+        },
+        {
+            "title": "מאמרים",
+            "to": "/articles"
+        }
+    ]
+}
