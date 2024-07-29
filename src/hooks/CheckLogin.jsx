@@ -12,10 +12,6 @@ export default function CheckLogin() {
 
     // TODO - 
 
-    const [pageState, setPageState] = useState({
-        loggedIn: false,
-        loading: false
-    })
 
     const reqLogin = async () => {
         if (!token || user) return;

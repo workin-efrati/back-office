@@ -1,14 +1,62 @@
 {
-    "thead":[
-       { "key":  "id", "name": "מזהה", "type": "string"  , "sortable": true , "searchable": true},
-       { "key":  "id", "name": "שם", "type": "string"  , "sortable": true , "searchable": true},
-       { "key":  "id", "name": "גיל", "type": "string"  , "sortable": true , "searchable": true},
-       { "key":  "id", "name": "דאטא", "type": "string"  , "sortable": true , "searchable": true},
-       { "key":  "id", "name": "עוד דטא", "type": "string"  , "sortable": true , "searchable": true}
+    "thead": [
+        {
+            "key": "id",
+            "name": "מזהה",
+            "type": "string",
+            "sortable": true,
+            "searchable": true
+        },
+        {
+            "key": "name",
+            "name": "שם",
+            "type": "string",
+            "sortable": true,
+            "searchable": true
+        },
+        {
+            "key": "age",
+            "name": "גיל",
+            "type": "string",
+            "sortable": true,
+            "searchable": true
+        },
+        {
+            "key": "active",
+            "name": "פעיל",
+            "type": "boolean",
+            "sortable": true,
+            "searchable": true
+        },
+        {
+            "key": "img",
+            "name": "תמונה",
+            "type": "img",
+            "sortable": true,
+            "searchable": true
+        }
     ],
-    "tbody":[
-        {"id":"1","name":"John","age":"25","name1":"John","age2":"25"},
-        {"id":"2","name":"Alice","age":"30","name1":"John","age2":"25"},
-        {"id":"3","name":"Bob","age":"28","name1":"John","age2":"25"}
+    "tbody": [
+        {
+            "id": "1",
+            "age": "25",
+            "name": "John",
+            "active": false,
+            "img": "https://www.euroschoolindia.com/wp-content/uploads/2023/09/world-war-I.jpg"
+        },
+        {
+            "id": "2",
+            "name": "Alice",
+            "age": "30",
+            "active": true,
+            "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBQ6Gn7oh5sGrVNnq9qjUDNU7HfclX-SunVcA4wMeM5Xj_-B4ySdBdKR4h_lK_Qk-7G_8&usqp=CAU"
+        },
+        {
+            "id": "3",
+            "name": "Bob",
+            "age": "28",
+            "active": true,
+            "img": "https://img.freepik.com/free-photo/cruel-war-scenes-digital-painting_456031-162.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1722124800&semt=sph "
+        }
     ]
 }

@@ -1,32 +1,40 @@
 import './table.scss'
 import { MdEdit } from "react-icons/md";
-import { FaTrash } from "react-icons/fa";
-export default function Table({ thead, tbody = [], onEdit = () => { }, onDelete = () => { } }) {
+import { IoMdTrash } from "react-icons/io";
+import TdGeneric from './TdGeneric/tdGeneric';
+
+export default function Table({ thead, tbody = [] }) {
     const columns = Object.keys(tbody[0] || []) || [];
     return (
-        <table className='Table'>
-            <thead>
-                <tr>
-                    {thead.map((th, i) => (
-                        <th key={"th" + i}>{th.name} </th>
-                    ))}
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                {tbody.map((row, i) => {
-                    return (
-                        <tr key={"tr" + i}>
-                            {columns.map((column, j) => (
-                                <td key={"td" + j}>{row[column]}</td>
-                            ))}
-                            <td className='iconsTd' onClick={()=>{onEdit(row._id)}}><button><MdEdit/> </button> </td>
-                            <td className='iconsTd' onClick={()=>{onDelete(row._id)}}><button><FaTrash/> </button></td>
-                        </tr>
-                    )
-                })}
-            </tbody>
-        </table>
+        <div className='Table'>
+
+            <table >
+                <thead>
+                    <tr>
+                        {thead.map((th, i) => (
+                            <th key={"th" + i}>
+                                {th.name}
+
+                            </th>
+                        ))}
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {tbody.map((row, i) => {
+                        return (
+                            <tr key={"tr" + i}>
+                                {thead.map((column, j) => (
+                                    <td key={"td" + j}>
+                                        <TdGeneric type={thead[j].type} value={row[column.key]} />
+                                    </td>
+                                ))}
+                                <td className='iconsTd' ><button><MdEdit /> </button> <button><IoMdTrash /> </button></td>
+                            </tr>
+                        )
+                    })}
+                </tbody>
+            </table>
+        </div>
     )
 }
