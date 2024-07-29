@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import Home from "../pages/Home/home";
-import Login from "../pages/Login/login";
+// import Login from "../pages/Login/login";
 import axios from "axios";
-import LoadingPage from "../pages/LoadingPage/loadingPage";
+// import LoadingPage from "../pages/LoadingPage/loadingPage";
 import { UseUserInfo } from "../store/UseUserInfo";
 
 export default function CheckLogin() {
@@ -38,8 +38,9 @@ export default function CheckLogin() {
 
     return (
         <>
-        {loading ? <LoadingPage/> :
-        user ? <Home /> : <Login />}
+        <Home/>
+        {/* {loading ? <LoadingPag/> :
+        user ? <Home /> : <Login />} */}
         </>
     )
 }
