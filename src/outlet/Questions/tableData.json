@@ -1,0 +1,94 @@
+{
+    "thead": [
+ 
+        {
+            "key": "question",
+            "name": "שאלה",
+            "type": "string",
+            "sortable": true,
+            "searchable": true
+        },
+        {
+            "key": "answer",
+            "name": "תשובה",
+            "type": "string",
+            "sortable": true,
+            "searchable": true
+        },
+        {
+            "key": "tags",
+            "name": "תגיות",
+            "type": "array-object",
+            "sortable": true,
+            "searchable": true
+        },
+        {
+            "key": "active",
+            "name": "פעיל",
+            "type": "boolean",
+            "sortable": true,
+            "searchable": true
+        },
+        {
+            "key": "img",
+            "name": "תמונה",
+            "type": "img",
+            "sortable": true,
+            "searchable": true
+        },
+        {
+            "key": "createdAt",
+            "name": "תאריך",
+            "type": "date",
+            "sortable": true,
+            "searchable": true
+        }
+    ],
+    "tbody": [
+        {
+            "question": "האם מותר להיות הומו בשבת משום עינוג הגוף",
+            "answer": "לא. כמו שכתוב ושמחת בחגיך. ולא כתוב והתחנגלת בחגיך",
+            "title": "הומו בשבת",
+            "tags": "שבת , להט'ב",
+            "active": true,
+            "date": "1/12/1999",
+            "img": "https://kappanonline.org/wp-content/uploads/2024/03/PDK_101_4_FirstPerson_554x350.png"
+        },
+        {
+            "question": "האם מותר להיות הומו בשבת משום עינוג הגוף",
+            "answer": "לא. כמו שכתוב ושמחת בחגיך. ולא כתוב והתחנגלת בחגיך",
+            "title": "הומו בשבת",
+            "tags": "שבת , להט'ב",
+            "active": true,
+            "date": "1/12/1999",
+            "img": "https://kappanonline.org/wp-content/uploads/2024/03/PDK_101_4_FirstPerson_554x350.png"
+        },
+        {
+            "question": "האם מותר להיות הומו בשבת משום עינוג הגוף",
+            "answer": "לא. כמו שכתוב ושמחת בחגיך. ולא כתוב והתחנגלת בחגיך",
+            "title": "הומו בשבת",
+            "tags": "שבת , להט'ב",
+            "active": true,
+            "date": "1/12/1999",
+            "img": "https://kappanonline.org/wp-content/uploads/2024/03/PDK_101_4_FirstPerson_554x350.png"
+        },
+        {
+            "question": "האם מותר להיות הומו בשבת משום עינוג הגוף",
+            "answer": "לא. כמו שכתוב ושמחת בחגיך. ולא כתוב והתחנגלת בחגיך",
+            "tags": "שבת , להט'ב",
+            "title": "הומו בשבת",
+            "active": true,
+            "date": "1/12/1999",
+            "img": "https://kappanonline.org/wp-content/uploads/2024/03/PDK_101_4_FirstPerson_554x350.png"
+        },
+        {
+            "question": "האם מותר להיות הומו בשבת משום עינוג הגוף",
+            "answer": "לא. כמו שכתוב ושמחת בחגיך. ולא כתוב והתחנגלת בחגיך",
+            "tags": "שבת , להט'ב",
+            "title": "הומו בשבת",
+            "active": true,
+            "date": "1/12/1999",
+            "img": "https://kappanonline.org/wp-content/uploads/2024/03/PDK_101_4_FirstPerson_554x350.png"
+        }
+    ]
+}

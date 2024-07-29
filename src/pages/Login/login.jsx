@@ -1,7 +1,7 @@
 import './login.scss'
 import { UseUserInfo } from '../../store/UseUserInfo'
 import { GoogleOAuthProvider } from '@react-oauth/google'
-import GoogleLogin from '../../components/GoogleLogin/googleLogin'
+import GoogleLogin from '../../components/GoogleLogin/GoogleLogin'
 
 export default function Login() {
     const clientId = import.meta.env.VITE_APP_USER_ID;
