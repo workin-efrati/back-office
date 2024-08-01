@@ -9,8 +9,7 @@ import Video from "./outlet/Video/video"
 import Test from "./tests"
 import CheckLogin from "./hooks/CheckLogin"
 import { RiH1 } from "react-icons/ri"
-import EditQa from "./pages/EdirQa/home"
-
+import EditQa from "./pages/EditQa/EditQa"
 export default function App() {
 
   return (
