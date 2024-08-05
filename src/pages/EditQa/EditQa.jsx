@@ -3,6 +3,8 @@ import { useApi } from '../../hooks/useApi'
 import { useEffect, useState } from 'react'
 import { UploadChat } from '../../components/UploadChat'
 import { MdDelete } from "react-icons/md";
+import { FaUndoAlt } from "react-icons/fa";
+import Calendar from '../../components/Calender';
 
 export default function EditQa() {
   const [questions, setQuestions] = useState([]);
@@ -18,19 +20,23 @@ export default function EditQa() {
     tags: []
   });
 
-  const fechData = async () => {
-    const result = await useApi({ method: 'POST', body: { "from": "5/26/20, 21:19", "to": "5/27/20, 21:19", "limit": 1000 }, url: '/messages' })
-    return result.sort((a, b) => new Date(a.date) - new Date(b.date));
-  }
+  const fechData = async (fromDate,toDate) =>  await useApi({ method: 'POST', body: { "from": fromDate, "to": toDate, "limit": 1000 }, url: '/messages' })
 
   useEffect(() => {
-    fechData().then((data) => {
-      setQuestions(data.filter(msg => msg.isQuestion))
-      setAnswers(data.filter(msg => !msg.isQuestion))
-    }
-
-    )
+    // fechData().then((data) => {
+    //   setQuestions(data.filter(msg => msg.isQuestion))
+    //   setAnswers(data.filter(msg => !msg.isQuestion))
+    // }
+    // )
   }, [])
+
+  const onDateSelect = (fromDate, toDate)=>{
+    console.log(fromDate, toDate)
+    fechData(fromDate,toDate).then((data) => {
+          setQuestions(data.filter(msg => msg.isQuestion))
+          setAnswers(data.filter(msg => !msg.isQuestion))
+    })
+  }
 
 
   const displayDate = (date) => {
@@ -59,15 +65,23 @@ export default function EditQa() {
     if (!itemId) return
     const item = questions.find(i => i._id === itemId) || answers.find(i => i._id === itemId);
     if (!item) return
+    setAnswers(prevItems => prevItems.map(i => i === item ? { ...i, inProcess: true, relatedQuestions:editObj.question.map(q=>q._id)} : i) );
+    setQuestions(prevItems => prevItems.map(i => i === item ? { ...i, inProcess: true, relatedAnswers:editObj.answer.map(a=>a._id) } : i) );
+    setEditObj(prev => ({...prev, [field]: [...prev[field], item]}));
+};
+
+const handleDeledeDrop = (e) =>{
+    e.preventDefault();
+    e.stopPropagation();
+    const itemId = e.dataTransfer.getData('text/plain');
+    if (!itemId) return
+    const item = questions.find(i => i._id === itemId) || answers.find(i => i._id === itemId);
+    if (!item) return
     setAnswers(prevItems => prevItems.filter(i => i._id !== itemId));
     setQuestions(prevItems => prevItems.filter(i => i._id !== itemId));
-    if (field === 'delet') setDeletedMsg(prev => [...prev, item]);
-    else
-      setEditObj(prev => ({
-        ...prev,
-        [field]: [...prev[field], item]
-      }));
-  };
+    setDeletedMsg(prev => [...prev, item]);
+
+  }
 
 
   const handleDragOver = (e) => {
@@ -75,12 +89,13 @@ export default function EditQa() {
     e.stopPropagation();
   };
 
-
+  const removeFromProcess = (i) => { }
 
   return (
     <div className='home'>
       <h1>עריכת שאלות ותשובות</h1>
       <h2 className='alert'>{alert && alert}</h2>
+      <Calendar onDateSelect={onDateSelect} />
       <UploadChat setAlert={setAlert} />
       <div className='messagesContainer'>
         <div className='messages'>
@@ -89,7 +104,7 @@ export default function EditQa() {
               draggable
               onDragStart={(e) => handleDragStart(e, msg)}
               key={key}
-              className={`message question ${expandedQuestion === key && 'expendedMes'}`}>
+              className={`message question ${expandedQuestion === key && 'expendedMes'} ${msg.inProcess && 'inProcess'}`}>
               <div className='date'  >{`${msg.sender}, ${displayDate(msg.date)}`}</div>
               {msg.message}
             </div>
@@ -114,14 +129,17 @@ export default function EditQa() {
             <div onClick={() => expandAnswer(key)}
               draggable onDragStart={(e) => handleDragStart(e, msg)}
               key={key}
-              className={`message answer ${expandedAnswer === key && 'expendedMes'}`}>
-              <div className='date'>{`הרב אפרתי, ${displayDate(msg.date)}`}</div>
+              className={`message answer ${expandedAnswer === key && 'expendedMes'} ${msg.inProcess && 'inProcess'}`}>
+             <div className='dateContainer'>
+             <div className='date'>{`הרב אפרתי, ${displayDate(msg.date)}`}</div>
+             <div className='undo' onClick={()=>removeFromProcess(key)}>{msg.inProcess && <FaUndoAlt/> }</div>
+             </div>
               {msg.message}
             </div>
           ))}
         </div>
       </div>
-      <MdDelete className='trash' onDragOver={handleDragOver} onDrop={(e) => handleDrop(e, 'delet')} ></MdDelete>
+      <MdDelete className='trash' onDragOver={handleDragOver} onDrop={handleDeledeDrop } ></MdDelete>
 
     </div>
   );

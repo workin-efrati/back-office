@@ -64,6 +64,10 @@
   background-color: #8393da;
 }
 
+.inProcess{
+  opacity: 0.5;
+  background-color: #cbc2c2;
+}
 .date {
   font-size: 9px;
   background-color: rgb(201, 186, 200);
@@ -86,4 +90,12 @@
   background-color: #d2e475;
   border-radius: 7px;
   border: 2px solid #a8b75f ;
+}
+.dateContainer{
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+}
+.undo{
+z-index: 99;
 }
