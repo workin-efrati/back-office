@@ -1,6 +1,6 @@
 import './EditQa.scss'
 import { useApi } from '../../hooks/useApi'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { UploadChat } from '../../components/UploadChat'
 import { MdDelete } from "react-icons/md";
 import { FaUndoAlt } from "react-icons/fa";
@@ -13,28 +13,24 @@ export default function EditQa() {
   const [alert, setAlert] = useState();
   const [expandedQuestion, setExpandedQuestion] = useState(null);
   const [expandedAnswer, setExpandedAnswer] = useState(null);
+
+  const questionRef = useRef(null)
+  const answerRef = useRef(null)
   const [editObj, setEditObj] = useState({
-    question: [],
-    answer: [],
+    question: '',
+    answer: '',
     title: '',
-    tags: []
+    tags: [],
+    messagesId: []
   });
 
-  const fechData = async (fromDate,toDate) =>  await useApi({ method: 'POST', body: { "from": fromDate, "to": toDate, "limit": 1000 }, url: '/messages' })
+  const fechData = async (fromDate, toDate) => await useApi({ method: 'POST', body: { "from": fromDate, "to": toDate, "limit": 1000 }, url: '/messages' })
 
-  useEffect(() => {
-    // fechData().then((data) => {
-    //   setQuestions(data.filter(msg => msg.isQuestion))
-    //   setAnswers(data.filter(msg => !msg.isQuestion))
-    // }
-    // )
-  }, [])
-
-  const onDateSelect = (fromDate, toDate)=>{
+  const onDateSelect = (fromDate, toDate) => {
     console.log(fromDate, toDate)
-    fechData(fromDate,toDate).then((data) => {
-          setQuestions(data.filter(msg => msg.isQuestion))
-          setAnswers(data.filter(msg => !msg.isQuestion))
+    fechData(fromDate, toDate).then((data) => {
+      setQuestions(data.filter(msg => msg.isQuestion))
+      setAnswers(data.filter(msg => !msg.isQuestion))
     })
   }
 
@@ -65,12 +61,14 @@ export default function EditQa() {
     if (!itemId) return
     const item = questions.find(i => i._id === itemId) || answers.find(i => i._id === itemId);
     if (!item) return
-    setAnswers(prevItems => prevItems.map(i => i === item ? { ...i, inProcess: true, relatedQuestions:editObj.question.map(q=>q._id)} : i) );
-    setQuestions(prevItems => prevItems.map(i => i === item ? { ...i, inProcess: true, relatedAnswers:editObj.answer.map(a=>a._id) } : i) );
-    setEditObj(prev => ({...prev, [field]: [...prev[field], item]}));
-};
+    setAnswers(prevItems => prevItems.map(i => i === item ? { ...i, inProcess: true } : i));
+    setQuestions(prevItems => prevItems.map(i => i === item ? { ...i, inProcess: true } : i));
+    setEditObj(prev => ({ ...prev, [field]: prev[field] + item.message, messagesId: [...prev.messagesId, item._id] }));
 
-const handleDeledeDrop = (e) =>{
+    console.log(editObj)
+  };
+
+  const handleDeledeDrop = (e) => {
     e.preventDefault();
     e.stopPropagation();
     const itemId = e.dataTransfer.getData('text/plain');
@@ -89,7 +87,25 @@ const handleDeledeDrop = (e) =>{
     e.stopPropagation();
   };
 
+  const handleTitleChange = (e) => setEditObj(prev => ({ ...prev, title: e.target.value }));
+
   const removeFromProcess = (i) => { }
+
+  const handleSendQa = async () => {
+
+    const updatedObj = { ...editObj, question: questionRef.current.innerText, answer: answerRef.current.innerText, };
+
+    const result = await useApi({ method: 'POST', body: { "qa": updatedObj }, url: '/qa/upload' });
+
+    result && setEditObj({
+      question: '',
+      answer: '',
+      title: '',
+      tags: [],
+      messagesId: []
+    });
+  };
+
 
   return (
     <div className='home'>
@@ -112,17 +128,20 @@ const handleDeledeDrop = (e) =>{
         </div>
         <div className='editContainer'>
           <span>כותרת</span>
-          <div className='div_editor' contentEditable suppressContentEditableWarning={true}  ></div>
+          <input type='text' value={editObj.title} onChange={handleTitleChange} className='div_editor'   ></input>
           <span>שאלה</span>
           <div className='div_editor'
+            ref={questionRef}
             contentEditable suppressContentEditableWarning={true}
+            // onInput={handleQuestionChange}
             onDragOver={handleDragOver} onDrop={(e) => handleDrop(e, 'question')} >
-            {editObj.question?.map(q => q.message)} </div>
+            {editObj.question} </div>
           <span>תשובה</span>
           <div className='div_editor'
+            ref={answerRef}
             contentEditable suppressContentEditableWarning={true}
             onDragOver={handleDragOver} onDrop={(e) => handleDrop(e, 'answer')}  >
-            {editObj.answer?.map(a => a.message)}</div>
+            {editObj.answer}</div>
         </div>
         <div className='messages'>
           {answers?.map((msg, key) => (
@@ -130,16 +149,17 @@ const handleDeledeDrop = (e) =>{
               draggable onDragStart={(e) => handleDragStart(e, msg)}
               key={key}
               className={`message answer ${expandedAnswer === key && 'expendedMes'} ${msg.inProcess && 'inProcess'}`}>
-             <div className='dateContainer'>
-             <div className='date'>{`הרב אפרתי, ${displayDate(msg.date)}`}</div>
-             <div className='undo' onClick={()=>removeFromProcess(key)}>{msg.inProcess && <FaUndoAlt/> }</div>
-             </div>
+              <div className='dateContainer'>
+                <div className='date'>{`הרב אפרתי, ${displayDate(msg.date)}`}</div>
+                <div className='undo' onClick={() => removeFromProcess(key)}>{msg.inProcess && <FaUndoAlt />}</div>
+              </div>
               {msg.message}
             </div>
           ))}
         </div>
       </div>
-      <MdDelete className='trash' onDragOver={handleDragOver} onDrop={handleDeledeDrop } ></MdDelete>
+      <MdDelete className='trash' onDragOver={handleDragOver} onDrop={handleDeledeDrop} ></MdDelete>
+      <div onClick={handleSendQa}>שלח</div>
 
     </div>
   );
