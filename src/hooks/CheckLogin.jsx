@@ -27,7 +27,7 @@ export default function CheckLogin() {
             const userInfo = userInfoResponse.data;
             setPageState({ ...pageState, loggedIn: true })
         } catch (error) {
-            console.error('Error getting user info:', error);
+            console.error('Error getting user info:', error.message);
             setPageState({ ...pageState, loading: false })
         }
     }

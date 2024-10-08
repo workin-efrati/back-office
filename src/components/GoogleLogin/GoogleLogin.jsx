@@ -12,7 +12,7 @@ export default function GoogleLogin({ onLoginSuccess }) {
         const userInfo = userInfoResponse.data;
         onLoginSuccess({ token: tokenResponse.access_token, ...userInfo });
       } catch (error) {
-        console.error('Error saving user info:', error);
+        console.error('Error saving user info:', error.message);
       }
     },
     onError: () => console.log('Login Failed'),
